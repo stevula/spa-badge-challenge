@@ -50,7 +50,7 @@ var miniQuery = (function(selector) {
         },
 
         // AJAX Requests
-        request: function(type, url) {
+        request: function(type, url, data) {
 
             var promise = new Promise(function(resolve, reject) {
                 var req = new XMLHttpRequest();
@@ -66,14 +66,10 @@ var miniQuery = (function(selector) {
                         reject(req.response);
                     }
                 }
-                req.send("hi");
-            })
-
-            promise.then(function(resp) {
-                console.log("success");
-            }, function() {
-                console.log("failure");
+                req.send(data);
             });
+
+            return promise;
         }
     }
 })
