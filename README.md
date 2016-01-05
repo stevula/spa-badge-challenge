@@ -27,6 +27,7 @@ Rules
 - All DOM manipulation should take place on the client
 
 Considerations
+- Rails API lecture code: https://github.com/sf-copperheads-2016/rails-api-lecture
 - Badge sorting by vote count.
 - Routing. http://myapp.com/#/walker should show me Walker's page for example. See the pushState API for implementation ideas: https://developer.mozilla.org/en-US/docs/Web/API/History_API
 - Keeping track of votes. Use a cookie to manage how many times a person has voted.
