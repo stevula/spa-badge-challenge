@@ -1,7 +1,34 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+COPPERHEADS = [
+  "Andrew Blum",
+  "Armani Saldana",
+  "Cecilia 'CJ' Joulain",
+  "Danielle Cameron",
+  "Daniel Woznicki",
+  "Eric Dell'Aringa",
+  "Gouron Paul",
+  "Isaac Lee",
+  "Jeremy Powell",
+  "Joseph Marion",
+  "Kai Huang",
+  "Kim Allen",
+  "Kyle Smith",
+  "Mark Janzer",
+  "Nicole Yee",
+  "Peter Wiebe",
+  "Steven Broderick"
+]
+
+COPPERHEADS.each {|student| Student.create(name: student)}
+
+badges = [
+  "DBC Guru",
+  "Most likely to do a handstand",
+  "Most likely not to show up",
+  "CSS master",
+  "Most likely to call you out on microaggressions"
+]
+
+
+Student.all.each do |student|
+  student.badges.create(name: badges.sample)
+end
