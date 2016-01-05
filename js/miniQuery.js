@@ -62,7 +62,7 @@ var miniQuery = (function(selector) {
                         resolve(req.response);
                     }
                     else {
-                        // error
+                        // failure
                         reject(req.response);
                     }
                 }

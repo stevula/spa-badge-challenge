@@ -1,5 +1,6 @@
 var students;
-var resp = _$().request("get", "http://localhost:3000/students").then(function(resp) {
+var resp = _$().request("get", "http://localhost:3000/students")
+            .then(function(resp) {
                 students = JSON.parse(resp);
             },
             function(err) {
@@ -7,3 +8,4 @@ var resp = _$().request("get", "http://localhost:3000/students").then(function(r
             });
 
 console.log(students)
+var x = "x"
