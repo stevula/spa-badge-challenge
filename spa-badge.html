@@ -33,19 +33,22 @@
       {{#badges}}
         <div id="{{student.id}}" class="slogan">
           <div class="body">{{@index}}) {{name}}</div>
+
+          <!-- upvote -->
           <div class="vote-on">
             <form action="#">
-              <input type="hidden" name="slogan_id" value=1>
+              <input type="hidden" name="slogan_id" value="1">
               <input type="hidden" name="vote_type" value="up">
               <button class="up" type="submit" name="submit">
                 <img src="img/upvote.gif" alt="upvote_image" />
               </button>
             </form>
           </div>
+
+          <!-- downvote -->
           <div class="vote-on">
             <form action="#">
-              <input type="hidden" name="slogan_id" value=1>
-              <input type="hidden" name="vote_type" value="down">
+              <input type="hidden" name="slogan_id" value="-1">
               <button class="down" type="submit" name="submit">
                   <img src="img/downvote.gif" alt="downvote_image" />
               </button>
@@ -53,7 +56,7 @@
           </div>
 
           <div class="points">
-            (25 points)
+            ({{votes}} points)
           </div>
         </div>
       {{/badges}}

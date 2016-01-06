@@ -13,31 +13,48 @@ var compiledStudentsIndex = Handlebars.compile(studentsIndexTemplate),
 var copperheads,
     copperhead;
 
-// hit index route
+// student name links on index page
+var indexLinkListener = function() {
+    _$(".student-link").on("click", function(e) {
+        e.preventDefault();
+        getShowPage("get", "http://localhost:3000/students/" + this.id);
+    });
+}
+
+// hit index route and render index page
 var getIndexPage = _$().request("get", "http://localhost:3000/students")
-    .then(
-        function(data) {
-            // bind copperheads to server data
-            copperheads = JSON.parse(data);
-        },
-        function(err) {
-            console.log("error");
-        })
-    .then(
-        function() {
-            // render image page template
-            contentArea.innerHTML = compiledStudentsIndex(copperheads);
+.then(
+    function(data) {
+        // bind copperheads to server data
+        copperheads = JSON.parse(data);
+    },
+    function(err) {
+        console.log("error");
+    })
+.then(
+    function() {
+        // render image page template
+        contentArea.innerHTML = compiledStudentsIndex(copperheads);
 
-            // bind ajax request to student name links
-            _$(".student-link").on("click", function(e) {
-                e.preventDefault();
-                getShowPage("get", "http://localhost:3000/students/" + this.id);
-            });
-        })
+        // bind student name links from index to show page action
+        indexLinkListener();
+    })
 
-// hit show route
+// vote button on show page
+var voteButtonListener = function() {
+    _$(".up").on("click", function(e) {
+        e.preventDefault();
+        // TODO: send patch request
+    });
+    _$(".down").on("click", function(e) {
+        e.preventDefault();
+        // TODO: send patch request
+    });
+}
+
+// hit show route and render show page
 var getShowPage = function(type, url) {
-    return _$().request(type, url)
+    _$().request(type, url)
     .then(
         function(data) {
             // bind copperhead to specific student data from server
@@ -50,8 +67,11 @@ var getShowPage = function(type, url) {
         function() {
             // render show page template
             contentArea.innerHTML = compiledStudentsShow(copperhead);
+
+            // bind vote buttons to badge vote-incrementing action
+            voteButtonListener();
         })
-    }
+}
 
 
 
