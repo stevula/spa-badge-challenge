@@ -22,6 +22,4 @@ var promise = _$().request("get", "http://localhost:3000/students").then(
     }
   );
 
-// var x = "x"
-
 
