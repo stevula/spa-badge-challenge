@@ -51,22 +51,30 @@ var miniQuery = (function(selector) {
 
         // AJAX Requests
         request: function(type, url, data) {
+            var data = JSON.stringify(data)
 
             var promise = new Promise(function(resolve, reject) {
                 var req = new XMLHttpRequest();
                 req.open(type, url, true);
 
-                req.onload = function() {
-                    if(req.status >= 200 && req.status < 400) {
-                        // success
-                        resolve(req.response);
-                    }
-                    else {
-                        // failure
-                        reject(req.response);
-                    }
+                if(type == "post") {
+                    req.setRequestHeader("Content-Type", "application/json");
+                    req.send(data);
                 }
-                req.send(data);
+
+                if(type == "get") {
+                    req.onload = function() {
+                        if(req.status >= 200 && req.status < 400) {
+                            // success
+                            resolve(req.response);
+                        }
+                        else {
+                            // failure
+                            reject(req.response);
+                        }
+                    }
+                    req.send();
+                }
             });
 
             return promise;

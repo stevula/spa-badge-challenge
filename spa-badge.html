@@ -60,6 +60,16 @@
           </div>
         </div>
       {{/badges}}
+
+      <div class="add-badge">
+        <h3>Add a Badge:</h3>
+
+        <form id="add-badge-form" action="#">
+          <input type="hidden" name="student_id" value="{{student.id}}" />
+          <input type="text" name="content" />
+          <input type="image" src="img/add_button.png" alt="Add Slogan" />
+        </form>
+      </div>
     </div>
   </script>
 

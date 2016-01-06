@@ -21,6 +21,35 @@ var indexLinkListener = function() {
     });
 }
 
+// "add badge" form on show page
+var addBadgeListener = function() {
+    _$("#add-badge-form").on("submit", function(e) {
+        e.preventDefault();
+
+        var studentID = this[0].getAttribute("value")
+        var content = this[1].value;
+
+        var data = {
+            student_id: studentID,
+            name: content
+        }
+
+        postNewBadge("post", "http://localhost:3000/badges", data)
+    });
+}
+
+// vote button on show page
+var voteButtonListener = function() {
+    _$(".up").on("click", function(e) {
+        e.preventDefault();
+        // TODO: send patch request
+    });
+    _$(".down").on("click", function(e) {
+        e.preventDefault();
+        // TODO: send patch request
+    });
+}
+
 // hit index route and render index page
 var getIndexPage = _$().request("get", "http://localhost:3000/students")
 .then(
@@ -40,18 +69,6 @@ var getIndexPage = _$().request("get", "http://localhost:3000/students")
         indexLinkListener();
     })
 
-// vote button on show page
-var voteButtonListener = function() {
-    _$(".up").on("click", function(e) {
-        e.preventDefault();
-        // TODO: send patch request
-    });
-    _$(".down").on("click", function(e) {
-        e.preventDefault();
-        // TODO: send patch request
-    });
-}
-
 // hit show route and render show page
 var getShowPage = function(type, url) {
     _$().request(type, url)
@@ -68,10 +85,25 @@ var getShowPage = function(type, url) {
             // render show page template
             contentArea.innerHTML = compiledStudentsShow(copperhead);
 
+            // bind new badge form submit to send post request
+            addBadgeListener();
+
             // bind vote buttons to badge vote-incrementing action
             voteButtonListener();
         })
 }
+
+var postNewBadge = function(type, url, data) {
+    _$().request(type, url, data)
+    .then(
+        function(resp) {
+            console.log("success")
+        },
+        function(err) {
+            console.log("error")
+        })
+}
+
 
 
 
