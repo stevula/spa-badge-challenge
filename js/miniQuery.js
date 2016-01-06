@@ -62,17 +62,18 @@ var miniQuery = (function(selector) {
                     req.send(data);
                 }
 
-                if(type == "get") {
-                    req.onload = function() {
-                        if(req.status >= 200 && req.status < 400) {
-                            // success
-                            resolve(req.response);
-                        }
-                        else {
-                            // failure
-                            reject(req.response);
-                        }
+                req.onload = function() {
+                    if(req.status >= 200 && req.status < 400) {
+                        // success
+                        resolve(req.response);
                     }
+                    else {
+                        // failure
+                        reject(req.response);
+                    }
+                }
+
+                if(type == "get") {
                     req.send();
                 }
             });

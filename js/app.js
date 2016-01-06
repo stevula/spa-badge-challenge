@@ -34,7 +34,7 @@ var addBadgeListener = function() {
             name: content
         }
 
-        postNewBadge("post", "http://localhost:3000/badges", data)
+        postNewBadge("post", "http://localhost:3000/badges", data);
     });
 }
 
@@ -52,33 +52,33 @@ var voteButtonListener = function() {
 
 // hit index route and render index page
 var getIndexPage = _$().request("get", "http://localhost:3000/students")
-.then(
-    function(data) {
-        // bind copperheads to server data
-        copperheads = JSON.parse(data);
-    },
-    function(err) {
-        console.log("error");
-    })
-.then(
-    function() {
-        // render image page template
-        contentArea.innerHTML = compiledStudentsIndex(copperheads);
+    .then(
+        function(data) {
+            // bind copperheads to server data
+            copperheads = JSON.parse(data);
+        },
+        function(err) {
+            console.log("couldn't load index");
+        })
+    .then(
+        function() {
+            // render image page template
+            contentArea.innerHTML = compiledStudentsIndex(copperheads);
 
-        // bind student name links from index to show page action
-        indexLinkListener();
-    })
+            // bind student name links from index to show page action
+            indexLinkListener();
+        })
 
 // hit show route and render show page
 var getShowPage = function(type, url) {
-    _$().request(type, url)
+    return _$().request(type, url)
     .then(
         function(data) {
             // bind copperhead to specific student data from server
             copperhead = JSON.parse(data);
         },
         function(err) {
-            console.log("error");
+            console.log("couldn't load show page");
         })
     .then(
         function() {
@@ -94,14 +94,17 @@ var getShowPage = function(type, url) {
 }
 
 var postNewBadge = function(type, url, data) {
-    _$().request(type, url, data)
+    return _$().request(type, url, data)
     .then(
-        function(resp) {
-            console.log("success")
+        function() {
+            debugger
+            studentID = copperhead.student.id;
+            contentArea.innerHTML = "";
+            getShowPage("get", "http://localhost:3000/students/" + studentID);
         },
-        function(err) {
-            console.log("error")
-        })
+        function() {
+            console.log("couldn't create new badge")
+        });
 }
 
 
