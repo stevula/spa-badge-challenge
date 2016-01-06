@@ -5,13 +5,14 @@ class StudentsController < ApplicationController
   end
 
   def show
-    @student = Student.find(student_params)
-    render json: @student
+    @student = Student.find_by(student_params)
+    @badges = @student.badges
+    render json: {student: @student, badges: @badges}
   end
 
   private
 
   def student_params
-    params.permit(:name)
+    params.permit(:id, :name)
   end
 end

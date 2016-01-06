@@ -12,37 +12,43 @@
 </head>
 
 <body>
-    <!-- templates -->
-    <script id="students-index-template" type="text/template">
-      <h1>SF Copperheads</h1>
+  <!-- index template -->
+  <script id="students-index-template" type="text/template">
+    <h1>SF Copperheads</h1>
 
+    <ul>
       {{#students}}
-        <ul>
-          <li><a id="{{id}}" class="student-link" href="/students/{{id}}">{{name}}</a></li>
-        </ul>
+        <li>
+          <a id="{{id}}" class="student-link" href="/students/{{id}}">{{name}}</a>
+        </li>
       {{/students}}
-    </script>
+    </ul>
+  </script>
 
-    <script id="students-show-template" type="text/template">
-      <h1>{{name}}</h1>
-      {{context}}
-    </script>
-    <!-- /templates -->
+  <!-- show template -->
+  <script id="students-show-template" type="text/template">
+    <h1>{{student.name}}</h1>
+    <ul>
+      {{#badges}}
+        <li>{{name}}</li>
+      {{/badges}}
+    </ul>
+  </script>
 
-  <nav class="nav">
-    <span class="nav-link">
-      <a href="spa-badge.html"> HOME </a>
-    </span>
-  </nav>
-
+  <!-- layout -->
   <div class="container">
+    <nav class="nav">
+      <span class="nav-link">
+        <a href="spa-badge.html"> HOME </a>
+      </span>
+    </nav>
+
     <div class="logo">
       <h1>SPA Badge</h1>
     </div>
 
-    <section id="content">
-      <!-- template renders here -->
-    </section>
+    <!-- templates render here -->
+    <section id="content"></section>
   </div>
 
   <!-- this is here so it loads last -->
