@@ -30,5 +30,5 @@ badges = [
 
 
 Student.all.each do |student|
-  student.badges.create(name: badges.sample)
+  3.times {student.badges.create(name: badges.sample)}
 end
