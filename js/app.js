@@ -1,5 +1,5 @@
 // bind body tag
-var body = document.getElementsByTagName("body")[0];
+var contentArea = document.getElementById("content");
 
 // bind template script
 var templateScript = document.getElementById("students-template").innerHTML;
@@ -7,19 +7,25 @@ var templateScript = document.getElementById("students-template").innerHTML;
 // compile template
 var template = Handlebars.compile(templateScript);
 
+// set copperheads object
+var copperheads;
 
-// populate copperheads objects with data from server
-var promise = _$().request("get", "http://localhost:3000/students").then(
+_$().request("get", "http://localhost:3000/students")
+.then(
     function(data) {
-      // set copperheads object
-      var copperheads = {students: JSON.parse(data)};
-
-      // add compiled html to page
-      body.innerHTML = template(copperheads);
+        // bind copperheads to server data
+        copperheads = {students: JSON.parse(data)};
     },
     function(err) {
-      alert(err);
-    }
-  );
+        alert(err);
+    })
+.then(
+    function() {
+        // add compiled html to page
+        contentArea.innerHTML = template(copperheads);
 
-
+        _$("a").on("click", function(e) {
+            e.preventDefault();
+            contentArea.innerHTML = "";
+        })
+    })

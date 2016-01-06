@@ -12,22 +12,27 @@
 </head>
 
 <body>
-  <!-- template -->
-  <script id="students-template" type="text/template">
-    <div class="container">
-      <div class="logo">
-        <h1>SPA Badge</h1>
-      </div>
-      <h1>SF Copperheads</h1>
+    <!-- template -->
+    <script id="students-template" type="text/template">
+        <h1>SF Copperheads</h1>
 
-      {{#students}}
-        <ul>
-          <li><a href="/">Name: {{name}}</a></li>
-        </ul>
-      {{/students}}
+        {{#students}}
+          <ul>
+            <li><a id="{{id}}" href="/students/{{id}}">{{name}}</a></li>
+          </ul>
+        {{/students}}
+    </script>
 
+
+  <div class="container">
+    <div class="logo">
+      <h1>SPA Badge</h1>
     </div>
-  </script>
+
+    <section id="content">
+      <!-- template renders here -->
+    </section>
+  </div>
 
   <!-- this is here so it loads last -->
   <script src="js/app.js"></script>
