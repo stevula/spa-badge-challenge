@@ -13,29 +13,29 @@ var compiledStudentsIndex = Handlebars.compile(studentsIndexTemplate),
 var copperheads,
     copperhead;
 
-// hit "/" (index) route
+// hit index route
 var getIndexPage = _$().request("get", "http://localhost:3000/students")
     .then(
         function(data) {
             // bind copperheads to server data
-            copperheads = {students: JSON.parse(data)};
+            copperheads = JSON.parse(data);
         },
         function(err) {
             console.log("error");
         })
     .then(
         function() {
-            // add compiled html to page
+            // render image page template
             contentArea.innerHTML = compiledStudentsIndex(copperheads);
 
+            // bind ajax request to student name links
             _$(".student-link").on("click", function(e) {
                 e.preventDefault();
                 getShowPage("get", "http://localhost:3000/students/" + this.id);
-                // contentArea.innerHTML = compiledStudentsShow(copperheads.students[objIndex]);
             });
         })
 
-// hit "/students/:id (show) route"
+// hit show route
 var getShowPage = function(type, url) {
     return _$().request(type, url)
     .then(
@@ -48,7 +48,7 @@ var getShowPage = function(type, url) {
         })
     .then(
         function() {
-            // add compiled html to page
+            // render show page template
             contentArea.innerHTML = compiledStudentsShow(copperhead);
         })
     }
