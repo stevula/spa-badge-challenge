@@ -12,17 +12,28 @@
 </head>
 
 <body>
-    <!-- template -->
-    <script id="students-template" type="text/template">
-        <h1>SF Copperheads</h1>
+    <!-- templates -->
+    <script id="students-index-template" type="text/template">
+      <h1>SF Copperheads</h1>
 
-        {{#students}}
-          <ul>
-            <li><a id="{{id}}" href="/students/{{id}}">{{name}}</a></li>
-          </ul>
-        {{/students}}
+      {{#students}}
+        <ul>
+          <li><a id="{{id}}" class="student-link" href="/students/{{id}}">{{name}}</a></li>
+        </ul>
+      {{/students}}
     </script>
 
+    <script id="students-show-template" type="text/template">
+      <h1>{{name}}</h1>
+      {{context}}
+    </script>
+    <!-- /templates -->
+
+  <nav class="nav">
+    <span class="nav-link">
+      <a href="spa-badge.html"> HOME </a>
+    </span>
+  </nav>
 
   <div class="container">
     <div class="logo">

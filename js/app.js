@@ -1,11 +1,13 @@
 // bind body tag
 var contentArea = document.getElementById("content");
 
-// bind template script
-var templateScript = document.getElementById("students-template").innerHTML;
+// bind template scripts
+var studentsIndexTemplate = document.getElementById("students-index-template").innerHTML;
+var studentsShowTemplate = document.getElementById("students-show-template").innerHTML;
 
 // compile template
-var template = Handlebars.compile(templateScript);
+var compiledStudentsIndex = Handlebars.compile(studentsIndexTemplate);
+var compiledStudentsShow = Handlebars.compile(studentsShowTemplate);
 
 // set copperheads object
 var copperheads;
@@ -22,10 +24,13 @@ _$().request("get", "http://localhost:3000/students")
 .then(
     function() {
         // add compiled html to page
-        contentArea.innerHTML = template(copperheads);
+        contentArea.innerHTML = compiledStudentsIndex(copperheads);
 
-        _$("a").on("click", function(e) {
+        _$(".student-link").on("click", function(e) {
             e.preventDefault();
-            contentArea.innerHTML = "";
+            objIndex = this.id - 1;
+            contentArea.innerHTML = compiledStudentsShow(copperheads.students[objIndex]);
         })
+
+
     })
