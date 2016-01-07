@@ -6,7 +6,7 @@ class StudentsController < ApplicationController
 
   def show
     @student = Student.find_by(student_params)
-    @badges = @student.badges
+    @badges = @student.badges.order(:created_at)
     render json: {student: @student, badges: @badges}
   end
 

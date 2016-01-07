@@ -57,7 +57,7 @@ var miniQuery = (function(selector) {
                 var req = new XMLHttpRequest();
                 req.open(type, url, true);
 
-                if(type == "post") {
+                if(type == "post"|| type == "put" || type == "patch") {
                     req.setRequestHeader("Content-Type", "application/json");
                     req.send(data);
                 }

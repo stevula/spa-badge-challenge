@@ -26,13 +26,13 @@ var addBadgeListener = function() {
     _$("#add-badge-form").on("submit", function(e) {
         e.preventDefault();
 
-        var studentID = this[0].getAttribute("value")
-        var content = this[1].value;
+        var studentID = this[0].getAttribute("value"),
+            content = this[1].value;
 
         var data = {
-            student_id: studentID,
-            name: content
-        }
+                student_id: studentID,
+                name: content
+            }
 
         postNewBadge("post", "http://localhost:3000/badges", data);
     });
@@ -42,11 +42,33 @@ var addBadgeListener = function() {
 var voteButtonListener = function() {
     _$(".up").on("click", function(e) {
         e.preventDefault();
-        // TODO: send patch request
+
+        var badgeID = this.getAttribute("name"),
+            studentID = copperhead.student.id,
+            upOrDown = this.getAttribute("class"),
+            value = upOrDown == "up" ? 1 : -1;
+
+        var data = {
+                id: badgeID,
+                value: value
+            }
+
+        updateBadge("put", "http://localhost:3000/badges/" + badgeID, data);
     });
     _$(".down").on("click", function(e) {
         e.preventDefault();
-        // TODO: send patch request
+
+        var badgeID = this.getAttribute("name"),
+            studentID = copperhead.student.id,
+            upOrDown = this.getAttribute("class"),
+            value = upOrDown == "up" ? 1 : -1;
+
+        var data = {
+                id: badgeID,
+                value: value
+            }
+
+        updateBadge("put", "http://localhost:3000/badges/" + badgeID, data);
     });
 }
 
@@ -71,7 +93,7 @@ var getIndexPage = _$().request("get", "http://localhost:3000/students")
 
 // hit show route and render show page
 var getShowPage = function(type, url) {
-    return _$().request(type, url)
+    _$().request(type, url)
     .then(
         function(data) {
             // bind copperhead to specific student data from server
@@ -94,19 +116,29 @@ var getShowPage = function(type, url) {
 }
 
 var postNewBadge = function(type, url, data) {
-    return _$().request(type, url, data)
+    _$().request(type, url, data)
     .then(
         function() {
-            debugger
-            studentID = copperhead.student.id;
-            contentArea.innerHTML = "";
-            getShowPage("get", "http://localhost:3000/students/" + studentID);
+            var studentID = copperhead.student.id;
+                contentArea.innerHTML = "";
+                getShowPage("get", "http://localhost:3000/students/" + studentID);
         },
         function() {
             console.log("couldn't create new badge")
         });
 }
 
-
-
-
+var updateBadge = function(type, url, data) {
+    _$().request(type, url, data)
+    .then(
+        function() {
+            console.log("success")
+            var studentID = copperhead.student.id;
+                contentArea.innerHTML = "";
+                getShowPage("get", "http://localhost:3000/students/" + studentID);
+        },
+        function() {
+            console.log("failure")
+            console.log("couldn't record vote")
+        });
+}
