@@ -1,3 +1,21 @@
+# SPA-Badge
+
+The purpose of this challenge was to take a static website containing HTML and CSS and turn it into a dynamic single-page application (SPA). The website displays a list of students in the class and allows the user to visit a "badge" page for a given user, where they can nominate the student for a new badge or vote on a badge that someone else has already created. 
+
+The application uses:
+
+- Rails API back-end
+
+- JavaScript front-end 
+
+- Handlebars.js for templating
+
+- "miniQuery.js" for DOM manipulation (a lightweight, custom implementation of several jQuery methods)  
+
+## Original instructions:
+
+- - -
+
 ## SPABadge
 
 Mr. Merriwether is opening up a competitor bootcamp and wants to hire DBC students to make another version of BootBadge.
