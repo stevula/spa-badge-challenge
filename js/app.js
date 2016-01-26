@@ -17,7 +17,7 @@ var copperheads,
 var indexLinkListener = function() {
     _$(".student-link").on("click", function(e) {
         e.preventDefault();
-        getShowPage("get", "http://localhost:3000/students/" + this.id);
+        getShowPage("get", "http://spa-badge.herokuapp.com//students/" + this.id);
     });
 }
 
@@ -34,7 +34,7 @@ var addBadgeListener = function() {
                 name: content
             }
 
-        postNewBadge("post", "http://localhost:3000/badges", data);
+        postNewBadge("post", "http://spa-badge.herokuapp.com//badges", data);
     });
 }
 
@@ -53,7 +53,7 @@ var voteButtonListener = function() {
                 value: value
             }
 
-        updateBadge("put", "http://localhost:3000/badges/" + badgeID, data);
+        updateBadge("put", "http://spa-badge.herokuapp.com//badges/" + badgeID, data);
     });
     _$(".down").on("click", function(e) {
         e.preventDefault();
@@ -68,12 +68,12 @@ var voteButtonListener = function() {
                 value: value
             }
 
-        updateBadge("put", "http://localhost:3000/badges/" + badgeID, data);
+        updateBadge("put", "http://spa-badge.herokuapp.com//badges/" + badgeID, data);
     });
 }
 
 // hit index route and render index page
-var getIndexPage = _$().request("get", "http://localhost:3000/students")
+var getIndexPage = _$().request("get", "http://spa-badge.herokuapp.com//students")
     .then(
         function(data) {
             // bind copperheads to server data
@@ -121,7 +121,7 @@ var postNewBadge = function(type, url, data) {
         function() {
             var studentID = copperhead.student.id;
                 contentArea.innerHTML = "";
-                getShowPage("get", "http://localhost:3000/students/" + studentID);
+                getShowPage("get", "http://spa-badge.herokuapp.com//students/" + studentID);
         },
         function() {
             console.log("couldn't create new badge")
@@ -135,7 +135,7 @@ var updateBadge = function(type, url, data) {
             console.log("success")
             var studentID = copperhead.student.id;
                 contentArea.innerHTML = "";
-                getShowPage("get", "http://localhost:3000/students/" + studentID);
+                getShowPage("get", "http://spa-badge.herokuapp.com//students/" + studentID);
         },
         function() {
             console.log("failure")
