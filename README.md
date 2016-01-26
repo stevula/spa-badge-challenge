@@ -10,7 +10,7 @@ The application uses:
 
 - Handlebars.js for templating
 
-- "miniQuery.js" for DOM manipulation (a lightweight, custom implementation of several jQuery methods)  
+- "miniQuery.js" for DOM manipulation, event-handling, and AJAX requests (a lightweight, custom implementation of several jQuery methods)  
 
 ## Original instructions:
 
